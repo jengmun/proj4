@@ -1,7 +1,67 @@
-import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { loginType } from "../../types/types";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/user";
 
 const Login = () => {
-  return <div></div>;
+  const dispatch = useDispatch();
+
+  const [loginDetails, setLoginDetails] = useState<loginType>({
+    email: "",
+    password: "",
+  });
+
+  const handleLogin = (loginDetails: loginType) => {
+    axios
+      .post("http://localhost:8000/user/login/", {
+        email: loginDetails.email,
+        password: loginDetails.password,
+      })
+      .then((token) => {
+        axios
+          .get(
+            `http://localhost:8000/user/get-account-details/${loginDetails.email}`
+          )
+          .then((details) => {
+            dispatch(
+              login({
+                email: loginDetails.email,
+                token: token.data,
+                id: details.data.id,
+              })
+            );
+          });
+      })
+      .catch((error) => console.error(error));
+  };
+
+  return (
+    <div>
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        onChange={(e) => {
+          setLoginDetails({ ...loginDetails, email: e.target.value });
+        }}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        id="password"
+        onChange={(e) => {
+          setLoginDetails({ ...loginDetails, password: e.target.value });
+        }}
+      />
+      <button
+        onClick={() => {
+          console.log(loginDetails);
+          handleLogin(loginDetails);
+        }}
+      >
+        Login
+      </button>
+    </div>
+  );
 };
 
 export default Login;
