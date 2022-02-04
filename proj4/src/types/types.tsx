@@ -15,10 +15,10 @@ export interface loginType {
 
 export interface accountType {
   email: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   address: string;
-  postalCode: string;
+  postal_code: string;
   password: string;
 }
 

@@ -5,6 +5,7 @@ import { useAppSelector } from "../../store/hooks";
 
 const ProductCard = (props: { item: productType }) => {
   const userID = useAppSelector((state) => state.user.id);
+  const token = useAppSelector((state) => state.user.token.access);
 
   const addToCart = () => {
     axios
@@ -13,7 +14,8 @@ const ProductCard = (props: { item: productType }) => {
         {
           cart_item: props.item.product_id,
           cart_owner: userID,
-        }
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
         console.log(response.data);

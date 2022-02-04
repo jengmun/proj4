@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { loginType } from "../../types/types";
 import { useDispatch } from "react-redux";
@@ -21,7 +22,8 @@ const Login = () => {
       .then((token) => {
         axios
           .get(
-            `http://localhost:8000/user/get-account-details/${loginDetails.email}`
+            `http://localhost:8000/user/get-account-details/${loginDetails.email}`,
+            { headers: { Authorization: `Bearer: ${token.data.access}` } }
           )
           .then((details) => {
             dispatch(
@@ -60,6 +62,10 @@ const Login = () => {
       >
         Login
       </button>
+
+      <NavLink to="/createaccount">
+        <button>Create Account</button>
+      </NavLink>
     </div>
   );
 };

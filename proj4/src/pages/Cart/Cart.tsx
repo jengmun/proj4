@@ -9,12 +9,16 @@ import CartItem from "./CartItem";
 const Cart = () => {
   const dispatch = useDispatch();
   const userID = useAppSelector((state) => state.user.id);
+  const token = useAppSelector((state) => state.user.token.access);
   const cart = useAppSelector((state) => state.cart.cart);
   const totalPrice = useAppSelector((state) => state.cart.totalPrice);
 
   const fetchCart = () => {
     axios
-      .get(`http://localhost:8000/cart/`, { params: { cart_owner: userID } })
+      .get(`http://localhost:8000/cart/`, {
+        params: { cart_owner: userID },
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         response.data.sort(
           (a: { cart_item__name: string }, b: { cart_item__name: string }) => {
@@ -51,10 +55,14 @@ const Cart = () => {
 
   const addToCart = (item: string) => {
     axios
-      .post(`http://localhost:8000/cart/update-cart/${item}/`, {
-        cart_item: item,
-        cart_owner: userID,
-      })
+      .post(
+        `http://localhost:8000/cart/update-cart/${item}/`,
+        {
+          cart_item: item,
+          cart_owner: userID,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then(() => {
         fetchCart();
       })
@@ -68,6 +76,7 @@ const Cart = () => {
     axios
       .delete(`http://localhost:8000/cart/update-cart/${item}/`, {
         params: { cart_owner: userID },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
         fetchCart();
@@ -82,6 +91,7 @@ const Cart = () => {
     axios
       .delete(`http://localhost:8000/cart/remove-from-cart/${item}/`, {
         params: { cart_owner: userID },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
         fetchCart();

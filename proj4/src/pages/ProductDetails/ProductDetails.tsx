@@ -10,6 +10,7 @@ const ProductDetails = () => {
     null
   );
   const userID = useAppSelector((state) => state.user.id);
+  const token = useAppSelector((state) => state.user.token.access);
 
   const getProductDetails = () => {
     axios
@@ -28,10 +29,14 @@ const ProductDetails = () => {
 
   const addToCart = () => {
     axios
-      .post(`http://localhost:8000/cart/update-cart/${params.id}/`, {
-        cart_item: params.id,
-        cart_owner: userID,
-      })
+      .post(
+        `http://localhost:8000/cart/update-cart/${params.id}/`,
+        {
+          cart_item: params.id,
+          cart_owner: userID,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then((response) => {
         console.log(response.data);
       })

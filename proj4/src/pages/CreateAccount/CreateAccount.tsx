@@ -5,10 +5,10 @@ import { accountType } from "../../types/types";
 const CreateAccount = () => {
   const [accountDetails, setAccountDetails] = useState<accountType>({
     email: "",
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     address: "",
-    postalCode: "",
+    postal_code: "",
     password: "",
   });
 
@@ -16,10 +16,10 @@ const CreateAccount = () => {
     axios
       .post("http://localhost:8000/user/create-account/", {
         email: accountDetails.email,
-        firstName: accountDetails.firstName,
-        lastName: accountDetails.lastName,
+        first_name: accountDetails.first_name,
+        last_name: accountDetails.last_name,
         address: accountDetails.address,
-        postalCode: accountDetails.postalCode,
+        postal_code: accountDetails.postal_code,
         password: accountDetails.password,
       })
       .then((response) => {
@@ -48,14 +48,14 @@ const CreateAccount = () => {
       <input
         id="firstName"
         onChange={(e) => {
-          setAccountDetails({ ...accountDetails, firstName: e.target.value });
+          setAccountDetails({ ...accountDetails, first_name: e.target.value });
         }}
       />
       <label htmlFor="lastName">Last Name</label>
       <input
         id="lastName"
         onChange={(e) => {
-          setAccountDetails({ ...accountDetails, lastName: e.target.value });
+          setAccountDetails({ ...accountDetails, last_name: e.target.value });
         }}
       />
       <label htmlFor="address">Address</label>
@@ -69,7 +69,7 @@ const CreateAccount = () => {
       <input
         id="postalCode"
         onChange={(e) => {
-          setAccountDetails({ ...accountDetails, postalCode: e.target.value });
+          setAccountDetails({ ...accountDetails, postal_code: e.target.value });
         }}
       />
       <button

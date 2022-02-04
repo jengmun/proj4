@@ -21,7 +21,11 @@ const Nav = () => {
             <li>Cart</li>
           </NavLink>
         )}
-        <li>Account</li>
+        {email && (
+          <NavLink to="/account">
+            <li>Account</li>
+          </NavLink>
+        )}
         {email ? (
           <li onClick={() => dispatch(logout())}>Logout</li>
         ) : (

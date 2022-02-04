@@ -6,9 +6,9 @@ const CartItem = (props: {
     cart_item__price: number;
     quantity: number;
   };
-  addToCart: () => void;
-  decreaseCartQuantity: () => void;
-  removeItem: () => void;
+  addToCart?: () => void;
+  decreaseCartQuantity?: () => void;
+  removeItem?: () => void;
 }) => {
   return (
     <div>
@@ -16,27 +16,31 @@ const CartItem = (props: {
       <img src={props.item.cart_item__image} alt={props.item.cart_item__name} />
       <p>${props.item.cart_item__price}</p>
       <p>Quantity: {props.item.quantity}</p>
-      <button
-        onClick={() => {
-          props.addToCart();
-        }}
-      >
-        Increase
-      </button>
-      <button
-        onClick={() => {
-          props.decreaseCartQuantity();
-        }}
-      >
-        Decrease
-      </button>
-      <button
-        onClick={() => {
-          props.removeItem();
-        }}
-      >
-        Remove
-      </button>
+      {props.addToCart && (
+        <>
+          <button
+            onClick={() => {
+              props.addToCart?.();
+            }}
+          >
+            Increase
+          </button>
+          <button
+            onClick={() => {
+              props.decreaseCartQuantity?.();
+            }}
+          >
+            Decrease
+          </button>
+          <button
+            onClick={() => {
+              props.removeItem?.();
+            }}
+          >
+            Remove
+          </button>
+        </>
+      )}
     </div>
   );
 };

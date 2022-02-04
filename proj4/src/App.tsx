@@ -7,6 +7,7 @@ import Overview from "./pages/Shop/Overview";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
 import CheckOut from "./pages/CheckOut/CheckOut";
+import Account from "./pages/Account/Account";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import Login from "./pages/Login/Login";
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/shop/:id" component={ProductDetails} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckOut} />
+        <Route path="/account" component={Account} />
         <Route path="/createaccount" component={CreateAccount} />
         <Route path="/login" component={Login} />
       </Switch>
