@@ -21,3 +21,11 @@ export interface accountType {
   postalCode: string;
   password: string;
 }
+
+export interface cartType {
+  cart_item: string;
+  cart_item__image: string;
+  cart_item__name: string;
+  cart_item__price: number;
+  quantity: number;
+}

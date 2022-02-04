@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
+import { setCart, setTotalPrice } from "../../store/cart";
 import CartItem from "./CartItem";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const userID = useAppSelector((state) => state.user.id);
-  const [cart, setCart] = useState<
-    {
-      cart_item: string;
-      cart_item__image: string;
-      cart_item__name: string;
-      cart_item__price: number;
-      quantity: number;
-    }[]
-  >([]);
+  const cart = useAppSelector((state) => state.cart.cart);
+  const totalPrice = useAppSelector((state) => state.cart.totalPrice);
 
   const fetchCart = () => {
     axios
@@ -32,13 +29,25 @@ const Cart = () => {
             return 0;
           }
         );
-        setCart(response.data);
+        dispatch(setCart(response.data));
       });
   };
 
   useEffect(() => {
     fetchCart();
   }, []);
+
+  const computeTotalPrice = () => {
+    let sum = 0;
+    cart.map((item) => {
+      sum += item.cart_item__price * item.quantity;
+    });
+    dispatch(setTotalPrice(sum));
+  };
+
+  useEffect(() => {
+    computeTotalPrice();
+  }, [cart]);
 
   const addToCart = (item: string) => {
     axios
@@ -77,7 +86,9 @@ const Cart = () => {
       .then(() => {
         fetchCart();
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -87,7 +98,6 @@ const Cart = () => {
           <CartItem
             item={item}
             addToCart={() => {
-              console.log(item.cart_item);
               addToCart(item.cart_item);
             }}
             decreaseCartQuantity={() => {
@@ -99,6 +109,10 @@ const Cart = () => {
           ></CartItem>
         );
       })}
+      <h3>Total: ${totalPrice}</h3>
+      <NavLink to="/checkout">
+        <button>Check Out</button>
+      </NavLink>
     </div>
   );
 };
