@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -10,6 +9,7 @@ import CheckOut from "./pages/CheckOut/CheckOut";
 import Account from "./pages/Account/Account";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import Login from "./pages/Login/Login";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
   return (
@@ -24,6 +24,8 @@ function App() {
         <Route path="/account" component={Account} />
         <Route path="/createaccount" component={CreateAccount} />
         <Route path="/login" component={Login} />
+
+        <Route path="/admin" component={Admin} />
       </Switch>
     </div>
   );

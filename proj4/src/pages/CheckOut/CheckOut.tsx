@@ -14,6 +14,7 @@ const CheckOut = () => {
         `http://localhost:8000/order/create/`,
         {
           cart_owner: userID,
+          total: totalPrice,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       )

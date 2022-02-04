@@ -22,8 +22,8 @@ const Login = () => {
       .then((token) => {
         axios
           .get(
-            `http://localhost:8000/user/get-account-details/${loginDetails.email}`,
-            { headers: { Authorization: `Bearer: ${token.data.access}` } }
+            `http://localhost:8000/user/get-account-details/${loginDetails.email}/`,
+            { headers: { Authorization: `Bearer ${token.data.access}` } }
           )
           .then((details) => {
             dispatch(
