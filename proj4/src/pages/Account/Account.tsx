@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../store/hooks";
 import axios from "axios";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 const Account = () => {
   const userID = useAppSelector((state) => state.user.id);
@@ -40,28 +41,50 @@ const Account = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Orders</h1>
+    <Box
+      sx={{
+        mt: "10rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Typography>Orders</Typography>
       {orders.map((order) => {
         return (
-          <div>
-            <h1>{order.order_no}</h1>
+          <Card
+            sx={{
+              width: "50vw",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+            }}
+          >
+            <Typography>{order.order_no}</Typography>
             {order.details.map((item) => {
               return (
-                <>
-                  <h3>{item["item__name"]}</h3>
-                  <img src={item["item__image"]} />
-                  <h3>${item["price"]}</h3>
-                  <h3>Quantity: {item["quantity"]}</h3>
-                </>
+                <Card sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <CardMedia
+                    sx={{ width: "20%" }}
+                    component="img"
+                    image={item["item__image"]}
+                  />
+                  <CardContent>
+                    <Typography>{item["item__name"]}</Typography>
+                    <Typography>${item["price"]}</Typography>
+                    <Typography>Quantity: {item["quantity"]}</Typography>
+                  </CardContent>
+                </Card>
               );
             })}
-            <p>${order.total}</p>
-            <p>Date: {order.date}</p>
-          </div>
+            <CardContent>
+              <Typography>${order.total}</Typography>
+              <Typography>Date: {order.date}</Typography>
+            </CardContent>
+          </Card>
         );
       })}
-    </div>
+    </Box>
   );
 };
 

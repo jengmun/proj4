@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
 import { setCart, setTotalPrice } from "../../store/cart";
 import CartItem from "./CartItem";
+import { Box, Button, Typography } from "@mui/material";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -102,7 +103,14 @@ const Cart = () => {
   };
 
   return (
-    <div>
+    <Box
+      sx={{
+        mt: "10rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {cart?.map((item) => {
         return (
           <CartItem
@@ -119,11 +127,22 @@ const Cart = () => {
           ></CartItem>
         );
       })}
-      <h3>Total: ${totalPrice}</h3>
-      <NavLink to="/checkout">
-        <button>Check Out</button>
-      </NavLink>
-    </div>
+      {cart.length ? (
+        <>
+          <Typography>Total: ${totalPrice}</Typography>
+          <NavLink to="/checkout">
+            <Button>Check Out</Button>
+          </NavLink>
+        </>
+      ) : (
+        <>
+          <Typography>Your cart is empty!</Typography>
+          <NavLink to="/shop">
+            <Button>Shop here!</Button>
+          </NavLink>
+        </>
+      )}
+    </Box>
   );
 };
 

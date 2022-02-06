@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../store/hooks";
 import axios from "axios";
 import CartItem from "../Cart/CartItem";
+import { Box, Button, Typography } from "@mui/material";
 
 const CheckOut = () => {
   const userID = useAppSelector((state) => state.user.id);
@@ -27,20 +28,27 @@ const CheckOut = () => {
   };
 
   return (
-    <div>
+    <Box
+      sx={{
+        mt: "10rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {cart?.map((item) => {
         return <CartItem item={item}></CartItem>;
       })}
-      <h3>Total: ${totalPrice}</h3>
+      <Typography>Total: ${totalPrice}</Typography>
 
-      <button
+      <Button
         onClick={() => {
           confirmOrder();
         }}
       >
         Pay
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 

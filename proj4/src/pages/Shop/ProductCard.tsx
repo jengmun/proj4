@@ -2,6 +2,14 @@ import axios from "axios";
 import { productType } from "../../types/types";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks";
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 
 const ProductCard = (props: { item: productType }) => {
   const userID = useAppSelector((state) => state.user.id);
@@ -26,15 +34,34 @@ const ProductCard = (props: { item: productType }) => {
   };
 
   return (
-    <div>
+    <Card
+      sx={{
+        width: "20vw",
+        height: "20vw",
+        border: "1px solid black",
+        m: "2rem",
+      }}
+    >
       <NavLink to={`/shop/${props.item.product_id}`}>
-        <h2>{props.item.name}</h2>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="70%"
+            image={props.item.image}
+            alt={props.item.name}
+          />
+          <CardContent
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <Typography>{props.item.name}</Typography>
+            <Typography>${props.item.price}</Typography>
+          </CardContent>
+        </CardActionArea>
       </NavLink>
-      <img src={props.item.image} alt={props.item.name}></img>
-      <p>${props.item.price}</p>
-      <p>{props.item.description}</p>
-      <button onClick={addToCart}>Add to cart</button>
-    </div>
+      <Button variant="contained" color="secondary" onClick={addToCart}>
+        Add to cart
+      </Button>
+    </Card>
   );
 };
 

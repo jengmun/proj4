@@ -4,6 +4,8 @@ import axios from "axios";
 import { loginType } from "../../types/types";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/user";
+import { Button, Box, TextField, InputAdornment } from "@mui/material";
+import { AccountCircle, Lock } from "@mui/icons-material";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,34 +41,79 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        onChange={(e) => {
-          setLoginDetails({ ...loginDetails, email: e.target.value });
-        }}
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        onChange={(e) => {
-          setLoginDetails({ ...loginDetails, password: e.target.value });
-        }}
-      />
-      <button
-        onClick={() => {
-          console.log(loginDetails);
-          handleLogin(loginDetails);
+    <Box
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "secondary.main",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          borderRadius: "20px",
+          backgroundColor: "pink",
+          height: "50%",
+          width: "20%",
         }}
       >
-        Login
-      </button>
+        <TextField
+          required
+          sx={{ margin: "1rem" }}
+          size="medium"
+          label="Email"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            ),
+          }}
+          onChange={(e) => {
+            setLoginDetails({ ...loginDetails, email: e.target.value });
+          }}
+        />
+        <TextField
+          required
+          sx={{ margin: "1rem" }}
+          size="medium"
+          label="Password"
+          type="password"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Lock />
+              </InputAdornment>
+            ),
+          }}
+          onChange={(e) => {
+            setLoginDetails({ ...loginDetails, password: e.target.value });
+          }}
+        />
 
-      <NavLink to="/createaccount">
-        <button>Create Account</button>
-      </NavLink>
-    </div>
+        <Button
+          sx={{ margin: "1rem", borderRadius: "200px" }}
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            handleLogin(loginDetails);
+          }}
+        >
+          Login
+        </Button>
+      </Box>
+      <Box sx={{ height: "50%", width: "20%", backgroundColor: "red" }}>
+        <NavLink to="/createaccount">
+          <Button variant="contained" color="secondary">
+            Create Account
+          </Button>
+        </NavLink>
+      </Box>
+    </Box>
   );
 };
 

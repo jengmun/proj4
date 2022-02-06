@@ -1,3 +1,13 @@
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+} from "@mui/material";
+import { Delete } from "@mui/icons-material";
+
 const CartItem = (props: {
   item: {
     cart_item: string;
@@ -11,37 +21,55 @@ const CartItem = (props: {
   removeItem?: () => void;
 }) => {
   return (
-    <div>
-      <h3>{props.item.cart_item__name}</h3>
-      <img src={props.item.cart_item__image} alt={props.item.cart_item__name} />
-      <p>${props.item.cart_item__price}</p>
-      <p>Quantity: {props.item.quantity}</p>
-      {props.addToCart && (
-        <>
-          <button
-            onClick={() => {
-              props.addToCart?.();
-            }}
-          >
-            Increase
-          </button>
-          <button
-            onClick={() => {
-              props.decreaseCartQuantity?.();
-            }}
-          >
-            Decrease
-          </button>
-          <button
-            onClick={() => {
-              props.removeItem?.();
-            }}
-          >
-            Remove
-          </button>
-        </>
-      )}
-    </div>
+    <Card
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        height: "20vh",
+        width: "50vw",
+        margin: "2rem",
+        padding: "2rem",
+      }}
+    >
+      <CardMedia
+        sx={{ width: "20vh" }}
+        component="img"
+        image={props.item.cart_item__image}
+        alt={props.item.cart_item__name}
+      />
+      <CardContent>
+        <Typography>{props.item.cart_item__name}</Typography>
+
+        {props.addToCart && (
+          <ButtonGroup>
+            <Button
+              onClick={() => {
+                props.decreaseCartQuantity?.();
+              }}
+            >
+              -
+            </Button>
+            <Button>{props.item.quantity}</Button>
+            <Button
+              onClick={() => {
+                props.addToCart?.();
+              }}
+            >
+              +
+            </Button>
+
+            <Delete
+              onClick={() => {
+                props.removeItem?.();
+              }}
+            >
+              <Button></Button>
+            </Delete>
+          </ButtonGroup>
+        )}
+        <Typography>${props.item.cart_item__price}</Typography>
+      </CardContent>
+    </Card>
   );
 };
 

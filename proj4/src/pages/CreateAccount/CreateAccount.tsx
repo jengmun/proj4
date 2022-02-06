@@ -1,6 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { accountType } from "../../types/types";
+import {
+  TextField,
+  Button,
+  Box,
+  Snackbar,
+  SnackbarContent,
+  Typography,
+} from "@mui/material";
 
 const CreateAccount = () => {
   const [accountDetails, setAccountDetails] = useState<accountType>({
@@ -11,6 +19,7 @@ const CreateAccount = () => {
     postal_code: "",
     password: "",
   });
+  const [open, setOpen] = useState(false);
 
   const handleCreateAccount = (accountDetails: accountType) => {
     axios
@@ -23,64 +32,133 @@ const CreateAccount = () => {
         password: accountDetails.password,
       })
       .then((response) => {
-        console.log(response.data);
+        setOpen(true);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setOpen(false);
+      });
   };
 
   return (
-    <div>
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        onChange={(e) => {
-          setAccountDetails({ ...accountDetails, email: e.target.value });
-        }}
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        onChange={(e) => {
-          setAccountDetails({ ...accountDetails, password: e.target.value });
-        }}
-      />
-      <label htmlFor="firstName">First Name</label>
-      <input
-        id="firstName"
-        onChange={(e) => {
-          setAccountDetails({ ...accountDetails, first_name: e.target.value });
-        }}
-      />
-      <label htmlFor="lastName">Last Name</label>
-      <input
-        id="lastName"
-        onChange={(e) => {
-          setAccountDetails({ ...accountDetails, last_name: e.target.value });
-        }}
-      />
-      <label htmlFor="address">Address</label>
-      <input
-        id="address"
-        onChange={(e) => {
-          setAccountDetails({ ...accountDetails, address: e.target.value });
-        }}
-      />
-      <label htmlFor="postalCode">Postal Code</label>
-      <input
-        id="postalCode"
-        onChange={(e) => {
-          setAccountDetails({ ...accountDetails, postal_code: e.target.value });
-        }}
-      />
-      <button
-        onClick={() => {
-          console.log(accountDetails);
-          handleCreateAccount(accountDetails);
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Box
+        sx={{
+          display: "grid",
+          gap: 1,
+          gridTemplateAreas: `"title title"
+          "email password"
+          "fn ln"
+          "address address" 
+          "postal ."
+          "submit submit"`,
+          width: "30%",
+          border: "1px solid black",
+          borderRadius: "50px",
+          padding: "30px",
         }}
       >
-        Create Account
-      </button>
-    </div>
+        <Box
+          style={{
+            gridArea: "title",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Typography variant="h3">SIGN UP</Typography>
+        </Box>
+        <TextField
+          required
+          label="Email"
+          variant="standard"
+          sx={{ m: 2, gridArea: "email" }}
+          onChange={(e) => {
+            setAccountDetails({ ...accountDetails, email: e.target.value });
+          }}
+        />
+        <TextField
+          required
+          label="Password"
+          variant="standard"
+          type="password"
+          sx={{ m: 2, gridArea: "password" }}
+          onChange={(e) => {
+            setAccountDetails({ ...accountDetails, password: e.target.value });
+          }}
+        />
+        <TextField
+          required
+          label="First Name"
+          variant="standard"
+          sx={{ m: 2, gridArea: "fn" }}
+          onChange={(e) => {
+            setAccountDetails({
+              ...accountDetails,
+              first_name: e.target.value,
+            });
+          }}
+        />
+        <TextField
+          required
+          label="Last Name"
+          variant="standard"
+          sx={{ m: 2, gridArea: "ln" }}
+          onChange={(e) => {
+            setAccountDetails({ ...accountDetails, last_name: e.target.value });
+          }}
+        />
+        <TextField
+          required
+          label="Address"
+          variant="standard"
+          sx={{ m: 2, gridArea: "address" }}
+          onChange={(e) => {
+            setAccountDetails({ ...accountDetails, address: e.target.value });
+          }}
+        />
+        <TextField
+          required
+          label="Postal Code"
+          variant="standard"
+          sx={{ m: 2, gridArea: "postal" }}
+          onChange={(e) => {
+            setAccountDetails({
+              ...accountDetails,
+              postal_code: e.target.value,
+            });
+          }}
+        />
+        <Button
+          sx={{ m: 2, gridArea: "submit" }}
+          variant="contained"
+          onClick={() => {
+            console.log(accountDetails);
+            handleCreateAccount(accountDetails);
+          }}
+        >
+          Create Account
+        </Button>
+      </Box>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
+        <SnackbarContent
+          sx={{ justifyContent: "center" }}
+          message="Account created!"
+        />
+      </Snackbar>
+    </Box>
   );
 };
 
