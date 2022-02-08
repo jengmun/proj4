@@ -1,14 +1,21 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { loginType } from "../../types/types";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/admin";
-import { Button, Box, TextField, InputAdornment } from "@mui/material";
+import {
+  Button,
+  Box,
+  TextField,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
 
 const AdminLogin = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [loginDetails, setLoginDetails] = useState<loginType>({
     email: "",
@@ -44,25 +51,44 @@ const AdminLogin = () => {
 
   return (
     <Box
-      style={{
+      sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        backgroundColor: "secondary.main",
+        background: "linear-gradient(135deg, #f16998, #02a5e9)",
       }}
     >
+      <Button
+        sx={{ position: "absolute", top: 5, left: "210px" }}
+        onClick={() => {
+          history.push("/");
+        }}
+      >
+        <Typography variant="h6" sx={{ color: "white" }}>
+          BACK
+        </Typography>
+      </Button>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           borderRadius: "20px",
-          backgroundColor: "pink",
-          height: "50%",
+          backgroundColor: "#f8eeff80",
+          height: "40%",
           width: "20%",
+          p: 5,
+          pb: 1,
+          pt: 1,
         }}
       >
+        <Typography
+          variant="h4"
+          sx={{ p: 2, textAlign: "center", color: "white" }}
+        >
+          SIGN IN
+        </Typography>
         <TextField
           required
           sx={{ margin: "1rem" }}
@@ -98,7 +124,10 @@ const AdminLogin = () => {
         />
 
         <Button
-          sx={{ margin: "1rem", borderRadius: "200px" }}
+          sx={{
+            margin: "1rem",
+            background: "linear-gradient(135deg, #f16998, #02a5e9)",
+          }}
           variant="contained"
           color="primary"
           onClick={() => {
