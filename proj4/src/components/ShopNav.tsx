@@ -47,20 +47,17 @@ const ShopNav = () => {
         </List>
       </Grid>
 
-      <Grid item xs={2}>
-        <Typography
-          sx={{
-            display: "flex",
-            justifyContent: "center",
+      <Grid item xs={2} sx={{ textAlign: "center" }}>
+        <img
+          style={{
             cursor: "pointer",
+            width: "11vw",
           }}
           onClick={() => {
             history.push("/");
           }}
-          variant="h2"
-        >
-          SKOOB
-        </Typography>
+          src="https://see.fontimg.com/api/renderfont4/519DV/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/U0tPT0I/better-grade.png"
+        />
       </Grid>
 
       <Grid item xs={5}>
@@ -74,7 +71,7 @@ const ShopNav = () => {
               sx={{ flex: 0, cursor: "pointer" }}
               onClick={() => history.push("/cart")}
             >
-              <Typography variant="body1">CART</Typography>
+              <Typography variant="h6">CART</Typography>
             </ListItem>
           )}
           {email && (
@@ -82,7 +79,7 @@ const ShopNav = () => {
               sx={{ flex: 0, cursor: "pointer" }}
               onClick={() => history.push("/account")}
             >
-              <Typography variant="body1">ACCOUNT</Typography>
+              <Typography variant="h6">ACCOUNT</Typography>
             </ListItem>
           )}
           {email ? (
@@ -93,14 +90,14 @@ const ShopNav = () => {
                 history.push("/");
               }}
             >
-              <Typography variant="body1">LOG OUT</Typography>
+              <Typography variant="h6">LOG OUT</Typography>
             </ListItem>
           ) : (
             <ListItem
               sx={{ cursor: "pointer" }}
               onClick={() => history.push("/login")}
             >
-              <Typography variant="body1">LOGIN</Typography>
+              <Typography variant="h6">LOGIN</Typography>
             </ListItem>
           )}
         </List>

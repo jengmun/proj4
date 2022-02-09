@@ -13,7 +13,7 @@ const AdminNav = () => {
     <Box
       style={{
         backgroundColor: "#1c1c1c",
-        width: "200px",
+        width: "10%",
         height: "100%",
         position: "fixed",
         display: "flex",
@@ -26,17 +26,18 @@ const AdminNav = () => {
         <>
           <Box sx={{ mt: "2rem", mb: "30vh" }}>
             <Typography
-              variant="h6"
+              variant="h5"
               sx={{
                 background: "linear-gradient(135deg, #f16998, #f5cb75)",
                 backgroundClip: "text",
                 color: "transparent",
+                textAlign: "center",
               }}
             >
               WELCOME
             </Typography>
             <Typography
-              variant="h6"
+              variant="h4"
               sx={{
                 background: "linear-gradient(135deg, #db4ee3, #3022ae)",
                 backgroundClip: "text",
@@ -48,7 +49,7 @@ const AdminNav = () => {
           </Box>
 
           <Typography
-            variant="h6"
+            variant="h5"
             onClick={() => {
               history.push("/admin/dashboard");
             }}
@@ -65,7 +66,7 @@ const AdminNav = () => {
       )}
       {firstName ? (
         <Typography
-          variant="h6"
+          variant="h5"
           onClick={() => {
             dispatch(logout());
             history.push("/admin");
@@ -81,7 +82,7 @@ const AdminNav = () => {
         </Typography>
       ) : (
         <Typography
-          variant="h6"
+          variant="h5"
           onClick={() => {
             history.push("/admin");
           }}
