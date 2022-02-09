@@ -1,6 +1,7 @@
 export interface productType {
   product_id: string;
   name: string;
+  author: string;
   description: string;
   image: string;
   cost: number;
