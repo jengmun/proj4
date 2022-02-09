@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { loginType } from "../../types/types";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/user";
-import { Button, Box, TextField, InputAdornment } from "@mui/material";
+import {
+  Button,
+  Box,
+  TextField,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const [loginDetails, setLoginDetails] = useState<loginType>({
     email: "",
     password: "",
@@ -55,15 +61,17 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          borderRadius: "20px",
-          backgroundColor: "pink",
-          height: "50%",
-          width: "20%",
+          backgroundColor: "#e1c0c0",
+          height: "60%",
+          width: "25%",
         }}
       >
+        <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
+          WELCOME BACK!
+        </Typography>
         <TextField
           required
-          sx={{ margin: "1rem" }}
+          sx={{ m: "1rem", ml: 5, mr: 5 }}
           size="medium"
           label="Email"
           InputProps={{
@@ -79,7 +87,7 @@ const Login = () => {
         />
         <TextField
           required
-          sx={{ margin: "1rem" }}
+          sx={{ margin: "1rem", ml: 5, mr: 5 }}
           size="medium"
           label="Password"
           type="password"
@@ -96,7 +104,7 @@ const Login = () => {
         />
 
         <Button
-          sx={{ margin: "1rem", borderRadius: "200px" }}
+          sx={{ margin: "1rem", ml: 5, mr: 5 }}
           variant="contained"
           color="primary"
           onClick={() => {
@@ -106,12 +114,38 @@ const Login = () => {
           Login
         </Button>
       </Box>
-      <Box sx={{ height: "50%", width: "20%", backgroundColor: "red" }}>
-        <NavLink to="/createaccount">
-          <Button variant="contained" color="secondary">
-            Create Account
+      <Box
+        sx={{
+          height: "60%",
+          width: "25%",
+          backgroundImage:
+            "url(https://images.iphotography.com/wp-content/uploads/2019/08/06103133/101-1.jpg)",
+          backgroundSize: "cover",
+        }}
+      >
+        <Box
+          sx={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.3)",
+          }}
+        >
+          <Button
+            sx={{
+              backgroundColor: "rgba(0,0,0,0)",
+              boxShadow: "none",
+              border: "1px solid white",
+            }}
+            variant="contained"
+            onClick={() => history.push("/createaccount")}
+          >
+            <Typography variant="h5">Create Account</Typography>
           </Button>
-        </NavLink>
+        </Box>
       </Box>
     </Box>
   );

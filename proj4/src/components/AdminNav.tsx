@@ -24,7 +24,7 @@ const AdminNav = () => {
     >
       {firstName && (
         <>
-          <Box sx={{ mt: "2rem", mb: "15rem" }}>
+          <Box sx={{ mt: "2rem", mb: "30vh" }}>
             <Typography
               variant="h6"
               sx={{

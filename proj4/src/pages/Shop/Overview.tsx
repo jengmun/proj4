@@ -29,7 +29,7 @@ const Overview = () => {
         flexWrap: "wrap",
         justifyContent: "center",
         m: "5rem",
-        bgcolor: "primary",
+        mt: "150px",
       }}
     >
       {allItems?.map((item) => {

@@ -1,11 +1,21 @@
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
 import { setCart, setTotalPrice } from "../../store/cart";
 import CartItem from "./CartItem";
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  TableContainer,
+  Table,
+  TableHead,
+  Typography,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -13,6 +23,7 @@ const Cart = () => {
   const token = useAppSelector((state) => state.user.token.access);
   const cart = useAppSelector((state) => state.cart.cart);
   const totalPrice = useAppSelector((state) => state.cart.totalPrice);
+  const history = useHistory();
 
   const fetchCart = () => {
     axios
@@ -103,46 +114,67 @@ const Cart = () => {
   };
 
   return (
-    <Box
-      sx={{
-        mt: "10rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      {cart?.map((item) => {
-        return (
-          <CartItem
-            item={item}
-            addToCart={() => {
-              addToCart(item.cart_item);
-            }}
-            decreaseCartQuantity={() => {
-              decreaseCartQuantity(item.cart_item);
-            }}
-            removeItem={() => {
-              removeItem(item.cart_item);
-            }}
-          ></CartItem>
-        );
-      })}
+    <>
+      {cart.length && (
+        <TableContainer sx={{ mt: "150px", boxSizing: "border-box", p: 2 }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Product</TableCell>
+                <TableCell align="left">Quantity</TableCell>
+                <TableCell align="center">Total</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {cart?.map((item) => {
+                return (
+                  <CartItem
+                    item={item}
+                    addToCart={() => {
+                      addToCart(item.cart_item);
+                    }}
+                    decreaseCartQuantity={() => {
+                      decreaseCartQuantity(item.cart_item);
+                    }}
+                    removeItem={() => {
+                      removeItem(item.cart_item);
+                    }}
+                  ></CartItem>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+
       {cart.length ? (
-        <>
-          <Typography>Total: ${totalPrice}</Typography>
-          <NavLink to="/checkout">
-            <Button>Check Out</Button>
-          </NavLink>
-        </>
+        <Box sx={{ float: "right", p: 5 }}>
+          <Typography sx={{ pb: 3 }}>Subtotal: ${totalPrice}</Typography>
+          <Button
+            onClick={() => {
+              history.push("/checkout");
+            }}
+          >
+            Check Out
+          </Button>
+        </Box>
       ) : (
-        <>
+        <Box
+          sx={{
+            display: "flex",
+            mt: "150px",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography>Your cart is empty!</Typography>
           <NavLink to="/shop">
             <Button>Shop here!</Button>
           </NavLink>
-        </>
+        </Box>
       )}
-    </Box>
+    </>
   );
 };
 

@@ -47,6 +47,7 @@ const CreateAccount = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
+        bgcolor: "#C09F80",
       }}
     >
       <Box
@@ -63,6 +64,8 @@ const CreateAccount = () => {
           border: "1px solid black",
           borderRadius: "50px",
           padding: "30px",
+          bgcolor: "#D7CEC7",
+          boxShadow: "2px 2px 10px #565656",
         }}
       >
         <Box

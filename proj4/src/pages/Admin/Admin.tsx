@@ -28,7 +28,6 @@ import {
 import { Box } from "@mui/system";
 
 const Admin = () => {
-  const userID = useAppSelector((state) => state.admin.id);
   const token = useAppSelector((state) => state.admin.token.access);
 
   const [data, setData] = useState<{
@@ -49,9 +48,10 @@ const Admin = () => {
 
   const fetchData = () => {
     axios
-      .get(`http://localhost:8000/order/analytics/`)
+      .get(`http://localhost:8000/order/analytics/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
-        console.log(response.data);
         setData(response.data);
       })
       .catch((error) => {
@@ -98,11 +98,11 @@ const Admin = () => {
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: "repeat(5, 1fr)",
         gridTemplateRows: "repeat(3, min-content)",
-        gridTemplateAreas: `"metrics metrics breakdown breakdown" 
-        "metrics metrics quantity top" 
-        "daily-sales daily-sales product-metrics product-metrics"`,
+        gridTemplateAreas: `"metrics metrics breakdown breakdown breakdown" 
+        "metrics metrics quantity quantity top" 
+        "daily-sales daily-sales daily-sales product-metrics product-metrics"`,
         bgcolor: "#0f111e",
         p: 2,
         ml: "200px",
@@ -164,7 +164,7 @@ const Admin = () => {
           sx={{
             p: 2,
             m: 2,
-            width: "25%",
+            minWidth: "25%",
             height: "fit-content",
             backgroundImage: "linear-gradient(135deg, #db4ee3, #3022ae)",
           }}
@@ -180,7 +180,7 @@ const Admin = () => {
           sx={{
             p: 2,
             m: 2,
-            width: "25%",
+            minWidth: "25%",
             height: "fit-content",
             backgroundImage: "linear-gradient(135deg, #f16998, #f5cb75)",
           }}
@@ -196,7 +196,7 @@ const Admin = () => {
           sx={{
             p: 2,
             m: 2,
-            width: "25%",
+            minWidth: "25%",
             height: "fit-content",
             backgroundImage: "linear-gradient(135deg, #00e2bf, #02a5e9)",
           }}
@@ -227,8 +227,8 @@ const Admin = () => {
               <Pie
                 dataKey="value"
                 data={metrics}
-                innerRadius={100}
-                outerRadius={140}
+                innerRadius="80%"
+                outerRadius="100%"
                 paddingAngle={5}
               >
                 {metrics.map(
@@ -260,37 +260,38 @@ const Admin = () => {
           p: 2,
           m: 2,
           bgcolor: "#1c1c1c",
-          height: "fit-content",
           gridArea: "breakdown",
         }}
       >
         <Typography sx={{ pb: 1, color: "white" }}>
           Revenue and Cost Breakdown by Product
         </Typography>
-        <PieChart width={600} height={250} style={{ margin: "0 auto" }}>
-          <Pie
-            dataKey="revenue"
-            data={data.sorted_quantity}
-            cx="25%"
-            cy="50%"
-            outerRadius={115}
-            label
-            fill="url(#color1)"
-          />
+        <ResponsiveContainer height={300}>
+          <PieChart style={{ margin: "0 auto" }}>
+            <Pie
+              dataKey="revenue"
+              data={data.sorted_quantity}
+              cx="25%"
+              cy="50%"
+              outerRadius="60%"
+              label
+              fill="url(#color1)"
+            />
 
-          <Pie
-            dataKey="cost"
-            data={data.sorted_quantity}
-            cx="75%"
-            cy="50%"
-            outerRadius={115}
-            innerRadius={60}
-            label
-            fill="url(#color2)"
-          />
+            <Pie
+              dataKey="cost"
+              data={data.sorted_quantity}
+              cx="75%"
+              cy="50%"
+              outerRadius="60%"
+              innerRadius="40%"
+              label
+              fill="url(#color2)"
+            />
 
-          <Tooltip content={<CustomTooltip />} />
-        </PieChart>
+            <Tooltip content={<CustomTooltip />} />
+          </PieChart>
+        </ResponsiveContainer>
       </Card>
       {/* 3. Quantity sold */}
       <Card
@@ -298,23 +299,21 @@ const Admin = () => {
           p: 2,
           m: 2,
           bgcolor: "#1c1c1c",
-          height: "fit-content",
           gridArea: "quantity",
         }}
       >
         <Typography sx={{ pb: 1, color: "white" }}>Quantity sold</Typography>
-        <BarChart
-          width={300}
-          height={250}
-          data={data.sorted_quantity}
-          style={{ paddingTop: 2, margin: "0 auto" }}
-        >
-          <XAxis dataKey="name" style={{ fill: "url(#color2)" }} dy={10} />
-          <YAxis style={{ fill: "white" }} />
-          <Tooltip />
-
-          <Bar dataKey="quantity" fill="url(#color1)" />
-        </BarChart>
+        <ResponsiveContainer width="100%" height={250}>
+          <BarChart
+            data={data.sorted_quantity}
+            style={{ paddingTop: 2, margin: "0 auto" }}
+          >
+            <XAxis dataKey="name" style={{ fill: "url(#color2)" }} dy={10} />
+            <YAxis style={{ fill: "white" }} />
+            <Tooltip />
+            <Bar dataKey="quantity" fill="url(#color1)" />
+          </BarChart>
+        </ResponsiveContainer>
       </Card>
       {/* 4. Best selling product */}
       <Card
@@ -323,6 +322,7 @@ const Admin = () => {
           m: 2,
           gridArea: "top",
           bgcolor: "#1c1c1c",
+          color: "white",
         }}
       >
         <Typography>
@@ -332,7 +332,12 @@ const Admin = () => {
           </Typography>
         </Typography>
         <CardMedia
-          sx={{ width: "70%", height: "70%", float: "right" }}
+          sx={{
+            width: "auto",
+            maxWidth: "90%",
+            maxHeight: "210px",
+            float: "right",
+          }}
           component="img"
           image={data.sorted_quantity[0]?.image}
         />
@@ -344,6 +349,7 @@ const Admin = () => {
           p: 2,
           m: 2,
           bgcolor: "#1c1c1c",
+          height: "100%",
         }}
       >
         <Typography sx={{ mb: 2, color: "white" }}>Daily Sales ($)</Typography>
@@ -364,7 +370,13 @@ const Admin = () => {
       </Card>
       {/* Product Metrics */}
       <Card
-        sx={{ gridArea: "product-metrics", p: 2, m: 2, bgcolor: "#1c1c1c" }}
+        sx={{
+          gridArea: "product-metrics",
+          p: 2,
+          m: 2,
+          bgcolor: "#1c1c1c",
+          height: "100%",
+        }}
       >
         <Typography sx={{ mb: 2, color: "white" }}>Product Metrics</Typography>
         <ResponsiveContainer width="100%" height="80%">

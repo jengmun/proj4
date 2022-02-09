@@ -76,7 +76,7 @@ const AdminLogin = () => {
           justifyContent: "center",
           borderRadius: "20px",
           backgroundColor: "#f8eeff80",
-          height: "40%",
+          height: "fit-content",
           width: "20%",
           p: 5,
           pb: 1,

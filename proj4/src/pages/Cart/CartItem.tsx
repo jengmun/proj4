@@ -1,10 +1,10 @@
 import {
   Button,
   ButtonGroup,
-  Card,
   CardMedia,
-  CardContent,
   Typography,
+  TableRow,
+  TableCell,
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
@@ -21,27 +21,22 @@ const CartItem = (props: {
   removeItem?: () => void;
 }) => {
   return (
-    <Card
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        height: "20vh",
-        width: "50vw",
-        margin: "2rem",
-        padding: "2rem",
-      }}
-    >
-      <CardMedia
-        sx={{ width: "20vh" }}
-        component="img"
-        image={props.item.cart_item__image}
-        alt={props.item.cart_item__name}
-      />
-      <CardContent>
-        <Typography>{props.item.cart_item__name}</Typography>
-
-        {props.addToCart && (
-          <ButtonGroup>
+    <TableRow>
+      <TableCell
+        component="th"
+        sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
+      >
+        <CardMedia
+          sx={{ width: "20vh" }}
+          component="img"
+          image={props.item.cart_item__image}
+          alt={props.item.cart_item__name}
+        />
+        <Typography sx={{ ml: 2 }}>{props.item.cart_item__name}</Typography>
+      </TableCell>
+      <TableCell align="center">
+        {props.addToCart ? (
+          <ButtonGroup sx={{ display: "flex", alignItems: "center" }}>
             <Button
               onClick={() => {
                 props.decreaseCartQuantity?.();
@@ -57,19 +52,21 @@ const CartItem = (props: {
             >
               +
             </Button>
-
             <Delete
+              sx={{ cursor: "pointer" }}
               onClick={() => {
                 props.removeItem?.();
               }}
-            >
-              <Button></Button>
-            </Delete>
+            ></Delete>
           </ButtonGroup>
+        ) : (
+          <Typography align="left">{props.item.quantity}</Typography>
         )}
+      </TableCell>
+      <TableCell align="center">
         <Typography>${props.item.cart_item__price}</Typography>
-      </CardContent>
-    </Card>
+      </TableCell>
+    </TableRow>
   );
 };
 
