@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../store/hooks";
 import axios from "axios";
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
 
 const Account = () => {
   const userID = useAppSelector((state) => state.user.id);
@@ -40,6 +49,25 @@ const Account = () => {
     orderList();
   }, []);
 
+  const monthFormatting = (month: string) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return months[parseInt(month, 10) - 1];
+  };
+
   return (
     <Box
       sx={{
@@ -49,39 +77,63 @@ const Account = () => {
         alignItems: "center",
       }}
     >
-      <Typography>Orders</Typography>
+      <Typography variant="h3" sx={{ mb: 2 }}>
+        Orders
+      </Typography>
+
       {orders.map((order) => {
         return (
-          <Card
+          <Accordion
             sx={{
-              width: "50vw",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
+              width: "50%",
+              minWidth: "300px",
+              maxWidth: "1000px",
+              mb: 2,
+              boxShadow: "2px 2px 10px grey",
             }}
           >
-            <Typography>{order.order_no}</Typography>
+            <AccordionSummary
+              sx={{ background: "linear-gradient(135deg, #D7CEC7, #C09F80)" }}
+            >
+              <Typography sx={{ width: "70%" }}>
+                Order No: {order.order_no}
+              </Typography>
+              <Box sx={{ width: "30%", textAlign: "right" }}>
+                <Typography>
+                  {`${order.date.slice(8, 10)} ${monthFormatting(
+                    order.date.slice(5, 7)
+                  )} ${order.date.slice(0, 4)}`}
+                </Typography>
+                <Typography variant="h6">${order.total}</Typography>
+              </Box>
+            </AccordionSummary>
             {order.details.map((item) => {
               return (
-                <Card sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <CardMedia
-                    sx={{ width: "20%" }}
-                    component="img"
-                    image={item["item__image"]}
-                  />
-                  <CardContent>
-                    <Typography>{item["item__name"]}</Typography>
-                    <Typography>${item["price"]}</Typography>
+                <AccordionDetails
+                  sx={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Box sx={{ width: "70%", display: "flex" }}>
+                    <img src={item["item__image"]} style={{ width: "40%" }} />
+                    <Typography variant="h5" sx={{ p: 2 }}>
+                      {item["item__name"]}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      width: "30%",
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end",
+                    }}
+                  >
                     <Typography>Quantity: {item["quantity"]}</Typography>
-                  </CardContent>
-                </Card>
+                    <Typography>${item["price"] * item["quantity"]}</Typography>
+                  </Box>
+                </AccordionDetails>
               );
             })}
-            <CardContent>
-              <Typography>${order.total}</Typography>
-              <Typography>Date: {order.date}</Typography>
-            </CardContent>
-          </Card>
+          </Accordion>
         );
       })}
     </Box>

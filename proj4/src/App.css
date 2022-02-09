@@ -1,6 +1,7 @@
 body {
-  height: 100vh;
+  height: 100%;
   width: calc(100vw - calc(100vw - 100%));
   margin: 0;
   padding: 0;
+  background-color: #efe9e9;
 }

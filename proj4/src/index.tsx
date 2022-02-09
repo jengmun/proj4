@@ -5,15 +5,51 @@ import { Provider } from "react-redux";
 import store from "./store/main";
 import "./index.css";
 import App from "./App";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 // import reportWebVitals from "./reportWebVitals";
+
+const theme = createTheme({
+  palette: {
+    primary: { main: "#565656" },
+    secondary: { main: "#C09F80" },
+    warning: { main: "#76323F" },
+    info: { main: "#D7CEC7" },
+  },
+  typography: {
+    h2: {
+      fontSize: "2vw",
+      letterSpacing: "5px",
+      fontWeight: "400",
+    },
+    h3: {
+      fontSize: "1.5vw",
+      letterSpacing: "2px",
+    },
+    h4: {
+      fontSize: "1.3vw",
+      letterSpacing: "2px",
+    },
+    h5: {
+      fontSize: "1vw",
+      letterSpacing: "1.5px",
+    },
+    h6: {
+      fontSize: "0.8vw",
+      letterSpacing: "1.2px",
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

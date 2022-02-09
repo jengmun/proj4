@@ -115,14 +115,22 @@ const Cart = () => {
 
   return (
     <>
-      {cart.length && (
-        <TableContainer sx={{ mt: "150px", boxSizing: "border-box", p: 2 }}>
-          <Table>
+      {cart.length ? (
+        <TableContainer
+          sx={{
+            mt: "150px",
+            boxSizing: "border-box",
+            p: 2,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Table sx={{ maxWidth: "1000px" }}>
             <TableHead>
               <TableRow>
                 <TableCell>Product</TableCell>
                 <TableCell align="left">Quantity</TableCell>
-                <TableCell align="center">Total</TableCell>
+                <TableCell align="center">Unit Price</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -142,22 +150,37 @@ const Cart = () => {
                   ></CartItem>
                 );
               })}
+
+              <TableRow>
+                <TableCell sx={{ border: "none" }} />
+                <TableCell align="right" sx={{ border: "none" }}>
+                  <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                    Subtotal:
+                  </Typography>
+                </TableCell>
+                <TableCell align="center" sx={{ border: "none" }}>
+                  <Typography>${totalPrice}</Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell sx={{ border: "none" }} />{" "}
+                <TableCell sx={{ border: "none" }} />
+                <TableCell sx={{ border: "none" }}>
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    sx={{ width: "80%" }}
+                    onClick={() => {
+                      history.push("/checkout");
+                    }}
+                  >
+                    Check Out
+                  </Button>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
-      )}
-
-      {cart.length ? (
-        <Box sx={{ float: "right", p: 5 }}>
-          <Typography sx={{ pb: 3 }}>Subtotal: ${totalPrice}</Typography>
-          <Button
-            onClick={() => {
-              history.push("/checkout");
-            }}
-          >
-            Check Out
-          </Button>
-        </Box>
       ) : (
         <Box
           sx={{

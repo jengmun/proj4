@@ -53,7 +53,6 @@ const Login = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        backgroundColor: "secondary.main",
       }}
     >
       <Box
@@ -64,6 +63,7 @@ const Login = () => {
           backgroundColor: "#e1c0c0",
           height: "60%",
           width: "25%",
+          boxShadow: "2px 2px 10px grey",
         }}
       >
         <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
@@ -113,6 +113,18 @@ const Login = () => {
         >
           Login
         </Button>
+        <Typography sx={{ textAlign: "center" }}>OR</Typography>
+
+        <Button
+          sx={{ mt: "1rem", ml: 5, mr: 5 }}
+          onClick={() => {
+            history.push("/admin");
+          }}
+          variant="contained"
+          color="secondary"
+        >
+          LOGIN AS ADMIN
+        </Button>
       </Box>
       <Box
         sx={{
@@ -121,6 +133,8 @@ const Login = () => {
           backgroundImage:
             "url(https://images.iphotography.com/wp-content/uploads/2019/08/06103133/101-1.jpg)",
           backgroundSize: "cover",
+          boxShadow: "3px 2px 10px black",
+          zIndex: 1,
         }}
       >
         <Box
@@ -131,19 +145,20 @@ const Login = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.3)",
+            backgroundColor: "rgba(0,0,0,0.2)",
+            backdropFilter: "blur(2px)",
           }}
         >
           <Button
             sx={{
               backgroundColor: "rgba(0,0,0,0)",
               boxShadow: "none",
-              border: "1px solid white",
+              border: "2px solid white",
             }}
             variant="contained"
             onClick={() => history.push("/createaccount")}
           >
-            <Typography variant="h5">Create Account</Typography>
+            <Typography variant="h4">Create Account</Typography>
           </Button>
         </Box>
       </Box>

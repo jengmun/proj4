@@ -85,7 +85,9 @@ const ProductDetails = () => {
             p: 5,
           }}
         >
-          <Typography variant="h3">{productDetails?.name}</Typography>
+          <Typography variant="h3" sx={{ textTransform: "uppercase" }}>
+            {productDetails?.name}
+          </Typography>
           <Typography sx={{ mt: 2, mb: 2 }}>
             By {productDetails?.author}
           </Typography>

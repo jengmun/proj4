@@ -47,7 +47,7 @@ const CreateAccount = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        bgcolor: "#C09F80",
+        backgroundImage: "linear-gradient(135deg, #D7CEC7, #C09F80)",
       }}
     >
       <Box

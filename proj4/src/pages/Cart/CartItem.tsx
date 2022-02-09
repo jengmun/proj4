@@ -32,7 +32,9 @@ const CartItem = (props: {
           image={props.item.cart_item__image}
           alt={props.item.cart_item__name}
         />
-        <Typography sx={{ ml: 2 }}>{props.item.cart_item__name}</Typography>
+        <Typography sx={{ ml: 2, textTransform: "uppercase" }}>
+          {props.item.cart_item__name}
+        </Typography>
       </TableCell>
       <TableCell align="center">
         {props.addToCart ? (
@@ -53,7 +55,7 @@ const CartItem = (props: {
               +
             </Button>
             <Delete
-              sx={{ cursor: "pointer" }}
+              sx={{ cursor: "pointer", ml: 2 }}
               onClick={() => {
                 props.removeItem?.();
               }}

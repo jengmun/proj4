@@ -72,10 +72,13 @@ const ProductCard = (props: { item: productType }) => {
       <CardContent
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <Typography variant="h6" sx={{ lineHeight: "normal", mb: 1 }}>
+        <Typography
+          variant="h5"
+          sx={{ lineHeight: "normal", mb: 1, textAlign: "center" }}
+        >
           {props.item.name}
         </Typography>
-        <Typography>${props.item.price}</Typography>
+        <Typography variant="h6">${props.item.price}</Typography>
       </CardContent>
       <Button
         sx={{ opacity: 0, mt: 2 }}

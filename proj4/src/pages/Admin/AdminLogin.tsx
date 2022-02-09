@@ -21,30 +21,34 @@ const AdminLogin = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleLogin = (loginDetails: loginType) => {
+    setError("");
     axios
       .post("http://localhost:8000/user/admin-login/", {
         email: loginDetails.email,
         password: loginDetails.password,
       })
       .then((token) => {
-        axios
-          .get(
-            `http://localhost:8000/user/get-account-details/${loginDetails.email}/`,
-            { headers: { Authorization: `Bearer ${token.data.access}` } }
-          )
-          .then((details) => {
-            dispatch(
-              login({
-                email: loginDetails.email,
-                firstName: details.data.first_name,
-                lastName: details.data.last_name,
-                token: token.data,
-                id: details.data.id,
+        token.data.access
+          ? axios
+              .get(
+                `http://localhost:8000/user/get-account-details/${loginDetails.email}/`,
+                { headers: { Authorization: `Bearer ${token.data.access}` } }
+              )
+              .then((details) => {
+                dispatch(
+                  login({
+                    email: loginDetails.email,
+                    firstName: details.data.first_name,
+                    lastName: details.data.last_name,
+                    token: token.data,
+                    id: details.data.id,
+                  })
+                );
               })
-            );
-          });
+          : setError(token.data);
       })
       .catch((error) => console.error(error));
   };
@@ -55,8 +59,8 @@ const AdminLogin = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
         background: "linear-gradient(135deg, #f16998, #02a5e9)",
+        height: "100vh",
       }}
     >
       <Button
@@ -79,8 +83,6 @@ const AdminLogin = () => {
           height: "fit-content",
           width: "20%",
           p: 5,
-          pb: 1,
-          pt: 1,
         }}
       >
         <Typography
@@ -136,6 +138,9 @@ const AdminLogin = () => {
         >
           Login
         </Button>
+        <Typography variant="h6" sx={{ textAlign: "center", color: "maroon" }}>
+          {error}
+        </Typography>
       </Box>
     </Box>
   );
