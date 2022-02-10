@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../store/hooks";
 import { logout } from "../store/user";
 import { Grid, List, ListItem, Typography } from "@mui/material";
+import { ShoppingCartOutlined } from "@mui/icons-material";
 
 const ShopNav = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const ShopNav = () => {
             history.push("/");
           }}
           src="https://see.fontimg.com/api/renderfont4/519DV/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/U0tPT0I/better-grade.png"
+          alt="logo"
         />
       </Grid>
 
@@ -71,7 +73,9 @@ const ShopNav = () => {
               sx={{ flex: 0, cursor: "pointer" }}
               onClick={() => history.push("/cart")}
             >
-              <Typography variant="h5">CART</Typography>
+              <Typography variant="h5">
+                <ShoppingCartOutlined />
+              </Typography>
             </ListItem>
           )}
           {email && (
@@ -79,7 +83,7 @@ const ShopNav = () => {
               sx={{ flex: 0, cursor: "pointer" }}
               onClick={() => history.push("/account")}
             >
-              <Typography variant="h5">ACCOUNT</Typography>
+              <Typography variant="h5">ORDERS</Typography>
             </ListItem>
           )}
           {email ? (

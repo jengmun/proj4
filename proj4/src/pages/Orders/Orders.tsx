@@ -9,7 +9,7 @@ import {
   AccordionDetails,
 } from "@mui/material";
 
-const Account = () => {
+const Orders = () => {
   const userID = useAppSelector((state) => state.user.id);
   const token = useAppSelector((state) => state.user.token.access);
   const [orders, setOrders] = useState<
@@ -68,15 +68,21 @@ const Account = () => {
   return (
     <Box
       sx={{
-        mt: "20vh",
+        mt: "15vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
     >
-      <Typography variant="h3" sx={{ mb: 2 }}>
-        Orders
-      </Typography>
+      {orders.length ? (
+        <Typography variant="h4" sx={{ mb: 2 }}>
+          Orders
+        </Typography>
+      ) : (
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          You have no orders!
+        </Typography>
+      )}
 
       {orders.map((order) => {
         return (
@@ -93,7 +99,7 @@ const Account = () => {
               sx={{ background: "linear-gradient(135deg, #D7CEC7, #C09F80)" }}
             >
               <Typography
-                variant="h4"
+                variant="h5"
                 sx={{ width: "70%", letterSpacing: "1px" }}
               >
                 Order No: {order.order_no}
@@ -113,7 +119,11 @@ const Account = () => {
                   sx={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Box sx={{ width: "70%", display: "flex" }}>
-                    <img src={item["item__image"]} style={{ width: "40%" }} />
+                    <img
+                      src={item["item__image"]}
+                      style={{ width: "40%" }}
+                      alt={item["item__name"]}
+                    />
                     <Typography variant="h4" sx={{ p: 2 }}>
                       {item["item__name"]}
                     </Typography>
@@ -144,4 +154,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default Orders;

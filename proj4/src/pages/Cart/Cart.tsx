@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
@@ -191,7 +191,7 @@ const Cart = () => {
             alignItems: "center",
           }}
         >
-          <Typography>Your cart is empty!</Typography>
+          <Typography variant="h5">Your cart is empty!</Typography>
           <Button
             sx={{ mt: "2vh" }}
             variant="outlined"

@@ -28,7 +28,8 @@ const Overview = () => {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
-        m: "5rem",
+        ml: "5rem",
+        mr: "5rem",
         mt: "15vh",
       }}
     >

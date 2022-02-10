@@ -62,7 +62,6 @@ const CreateAccount = () => {
           "postal ."
           "submit submit"`,
           width: "30%",
-          border: "1px solid black",
           borderRadius: "50px",
           padding: "clamp(2px, 5vh, 30px)",
           bgcolor: "#D7CEC7",

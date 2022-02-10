@@ -37,6 +37,9 @@ const theme = createTheme({
       fontSize: "0.8vw",
       letterSpacing: "1.2px",
     },
+    body1: {
+      fontSize: "0.8vw",
+    },
   },
 });
 

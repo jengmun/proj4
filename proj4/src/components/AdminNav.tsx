@@ -51,6 +51,21 @@ const AdminNav = () => {
           <Typography
             variant="h5"
             onClick={() => {
+              history.push("/admin/inventory");
+            }}
+            sx={{
+              cursor: "pointer",
+              background: "linear-gradient(135deg, #f16998, #f5cb75)",
+              backgroundClip: "text",
+              color: "transparent",
+              mb: "0.5vh",
+            }}
+          >
+            INVENTORY
+          </Typography>
+          <Typography
+            variant="h5"
+            onClick={() => {
               history.push("/admin/dashboard");
             }}
             sx={{
@@ -58,6 +73,7 @@ const AdminNav = () => {
               background: "linear-gradient(135deg, #f16998, #f5cb75)",
               backgroundClip: "text",
               color: "transparent",
+              mb: "0.5vh",
             }}
           >
             DASHBOARD
