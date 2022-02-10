@@ -1,12 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
 
 const Home = () => {
   return (
     <Box sx={{ height: "calc(100vh - 150px)" }}>
       <Box
         sx={{
-          marginTop: "150px",
+          marginTop: "15vh",
           height: "100%",
           display: "flex",
           justifyContent: "center",

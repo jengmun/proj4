@@ -192,9 +192,13 @@ const Cart = () => {
           }}
         >
           <Typography>Your cart is empty!</Typography>
-          <NavLink to="/shop">
-            <Button>Shop here!</Button>
-          </NavLink>
+          <Button
+            sx={{ mt: "2vh" }}
+            variant="outlined"
+            onClick={() => history.push("/shop")}
+          >
+            Shop here!
+          </Button>
         </Box>
       )}
     </>

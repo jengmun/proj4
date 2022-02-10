@@ -13,14 +13,13 @@ import {
   Label,
   LineChart,
   Line,
-  CartesianGrid,
   Cell,
   TooltipProps,
   AreaChart,
   Area,
   ResponsiveContainer,
 } from "recharts";
-import { Card, CardMedia, Typography } from "@mui/material";
+import { CardContent, Card, CardMedia, Typography } from "@mui/material";
 import {
   NameType,
   ValueType,
@@ -68,7 +67,7 @@ const Admin = () => {
     { name: "gross_profit", value: data.gross_profit },
   ];
 
-  const CustomTooltip = ({
+  const RevenueTooltip = ({
     active,
     payload,
   }: TooltipProps<ValueType, NameType>) => {
@@ -82,7 +81,34 @@ const Admin = () => {
             border: "1px solid #cccc",
           }}
         >
-          <label>{`${payload?.[0].name} : ${payload?.[0].value}%`}</label>
+          <label>{`${payload?.[0].name} : ${
+            Math.round((Number(payload?.[0].value) / data?.revenue) * 10000) /
+            100
+          }%`}</label>
+        </div>
+      );
+    }
+
+    return null;
+  };
+  // exactly the same except for calculation
+  const CostTooltip = ({
+    active,
+    payload,
+  }: TooltipProps<ValueType, NameType>) => {
+    if (active) {
+      return (
+        <div
+          className="custom-tooltip"
+          style={{
+            backgroundColor: "#ffff",
+            padding: "5px",
+            border: "1px solid #cccc",
+          }}
+        >
+          <label>{`${payload?.[0].name} : ${
+            Math.round((Number(payload?.[0].value) / data?.cost) * 10000) / 100
+          }%`}</label>
         </div>
       );
     }
@@ -100,53 +126,15 @@ const Admin = () => {
         display: "grid",
         gridTemplateColumns: "repeat(5, 1fr)",
         gridTemplateRows: "repeat(3, min-content)",
-        gridTemplateAreas: `"metrics metrics breakdown breakdown breakdown" 
-        "metrics metrics quantity quantity top" 
+        gridTemplateAreas: `"metrics metrics breakdown breakdown top" 
+        "metrics metrics quantity quantity quantity" 
         "daily-sales daily-sales daily-sales product-metrics product-metrics"`,
         bgcolor: "#0f111e",
         p: 2,
-        ml: "200px",
+        ml: "10%",
+        minHeight: "100vh",
       }}
     >
-      {/* Define fill colours for charts */}
-      <svg>
-        <defs>
-          <linearGradient
-            id="color1"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="100%"
-            spreadMethod="reflect"
-          >
-            <stop offset="0" stopColor="#db4ee3" />
-            <stop offset="1" stopColor="#3022ae" />
-          </linearGradient>
-          <linearGradient
-            id="color2"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="100%"
-            spreadMethod="reflect"
-          >
-            <stop offset="0" stopColor="#f5cb75" />
-            <stop offset="1" stopColor="#f16998" />
-          </linearGradient>
-          <linearGradient
-            id="color3"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="100%"
-            spreadMethod="reflect"
-          >
-            <stop offset="0" stopColor="#02a5e9" />
-            <stop offset="1" stopColor="#00e2bf" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       {/* 1. Metrics */}
 
       <Card
@@ -169,10 +157,13 @@ const Admin = () => {
             backgroundImage: "linear-gradient(135deg, #db4ee3, #3022ae)",
           }}
         >
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography variant="h5" sx={{ color: "white" }}>
             REVENUE:
           </Typography>
-          <Typography variant="h3" sx={{ float: "right", color: "white" }}>
+          <Typography
+            variant="h3"
+            sx={{ float: "right", color: "white", mt: 2 }}
+          >
             ${data.revenue}
           </Typography>
         </Card>
@@ -185,10 +176,13 @@ const Admin = () => {
             backgroundImage: "linear-gradient(135deg, #f16998, #f5cb75)",
           }}
         >
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography variant="h5" sx={{ color: "white" }}>
             COST:
           </Typography>
-          <Typography variant="h3" sx={{ float: "right", color: "white" }}>
+          <Typography
+            variant="h3"
+            sx={{ float: "right", color: "white", mt: 2 }}
+          >
             ${data.cost}
           </Typography>
         </Card>
@@ -201,10 +195,13 @@ const Admin = () => {
             backgroundImage: "linear-gradient(135deg, #00e2bf, #02a5e9)",
           }}
         >
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography variant="h5" sx={{ color: "white" }}>
             GROSS PROFIT:
           </Typography>
-          <Typography variant="h3" sx={{ float: "right", color: "white" }}>
+          <Typography
+            variant="h3"
+            sx={{ float: "right", color: "white", mt: 2 }}
+          >
             ${data.gross_profit}
           </Typography>
         </Card>
@@ -219,7 +216,7 @@ const Admin = () => {
             boxShadow: "none",
           }}
         >
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography variant="h6" sx={{ color: "white", mb: "2vh" }}>
             GROSS PROFIT MARGIN
           </Typography>
           <ResponsiveContainer height={300}>
@@ -242,7 +239,7 @@ const Admin = () => {
                 <Label
                   style={{
                     fill: "url(#color2)",
-                    fontSize: "3rem",
+                    fontSize: "3vw",
                     fontFamily: "Roboto",
                   }}
                   value={`${data.gpm * 100}%`}
@@ -250,6 +247,42 @@ const Admin = () => {
                 />
               </Pie>
               <Tooltip />
+              {/* Define fill colours for all charts */}
+              <defs>
+                <linearGradient
+                  id="color1"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="100%"
+                  spreadMethod="reflect"
+                >
+                  <stop offset="0" stopColor="#db4ee3" />
+                  <stop offset="1" stopColor="#3022ae" />
+                </linearGradient>
+                <linearGradient
+                  id="color2"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="100%"
+                  spreadMethod="reflect"
+                >
+                  <stop offset="0" stopColor="#f5cb75" />
+                  <stop offset="1" stopColor="#f16998" />
+                </linearGradient>
+                <linearGradient
+                  id="color3"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="100%"
+                  spreadMethod="reflect"
+                >
+                  <stop offset="0" stopColor="#02a5e9" />
+                  <stop offset="1" stopColor="#00e2bf" />
+                </linearGradient>
+              </defs>
             </PieChart>
           </ResponsiveContainer>
         </Card>
@@ -266,32 +299,48 @@ const Admin = () => {
         <Typography sx={{ pb: 1, color: "white" }}>
           Revenue and Cost Breakdown by Product
         </Typography>
-        <ResponsiveContainer height={300}>
-          <PieChart style={{ margin: "0 auto" }}>
-            <Pie
-              dataKey="revenue"
-              data={data.sorted_quantity}
-              cx="25%"
-              cy="50%"
-              outerRadius="60%"
-              label
-              fill="url(#color1)"
-            />
+        <CardContent sx={{ display: "flex", flexWrap: "wrap" }}>
+          <ResponsiveContainer height={300} width="50%">
+            <PieChart style={{ margin: "0 auto" }}>
+              <Pie
+                dataKey="revenue"
+                data={data.sorted_quantity}
+                cx="50%"
+                cy="50%"
+                outerRadius="70%"
+                fill="url(#color1)"
+              />
+              <Tooltip content={<RevenueTooltip />} />
+            </PieChart>
+          </ResponsiveContainer>
+          <ResponsiveContainer height={300} width="50%">
+            <PieChart style={{ margin: "0 auto" }}>
+              <Pie
+                dataKey="cost"
+                data={data.sorted_quantity}
+                cx="50%"
+                cy="50%"
+                outerRadius="70%"
+                innerRadius="40%"
+                fill="url(#color2)"
+              />
 
-            <Pie
-              dataKey="cost"
-              data={data.sorted_quantity}
-              cx="75%"
-              cy="50%"
-              outerRadius="60%"
-              innerRadius="40%"
-              label
-              fill="url(#color2)"
-            />
-
-            <Tooltip content={<CustomTooltip />} />
-          </PieChart>
-        </ResponsiveContainer>
+              <Tooltip content={<CostTooltip />} />
+            </PieChart>
+          </ResponsiveContainer>
+          <Typography
+            sx={{ width: "50%", color: "white", textAlign: "center" }}
+            variant="h6"
+          >
+            REVENUE
+          </Typography>
+          <Typography
+            sx={{ width: "50%", color: "white", textAlign: "center" }}
+            variant="h6"
+          >
+            COST
+          </Typography>
+        </CardContent>
       </Card>
       {/* 3. Quantity sold */}
       <Card
@@ -337,6 +386,7 @@ const Admin = () => {
             maxWidth: "90%",
             maxHeight: "210px",
             float: "right",
+            mt: 2,
           }}
           component="img"
           image={data.sorted_quantity[0]?.image}
@@ -349,7 +399,7 @@ const Admin = () => {
           p: 2,
           m: 2,
           bgcolor: "#1c1c1c",
-          height: "100%",
+          height: "90%",
         }}
       >
         <Typography sx={{ mb: 2, color: "white" }}>Daily Sales ($)</Typography>
@@ -375,7 +425,7 @@ const Admin = () => {
           p: 2,
           m: 2,
           bgcolor: "#1c1c1c",
-          height: "100%",
+          height: "90%",
         }}
       >
         <Typography sx={{ mb: 2, color: "white" }}>Product Metrics</Typography>

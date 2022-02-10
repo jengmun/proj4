@@ -47,11 +47,12 @@ const CreateAccount = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        backgroundImage: "linear-gradient(135deg, #D7CEC7, #C09F80)",
+        backgroundImage: "linear-gradient(135deg, #ede0d4, #C09F80)",
       }}
     >
       <Box
         sx={{
+          mt: "10vh",
           display: "grid",
           gap: 1,
           gridTemplateAreas: `"title title"
@@ -63,7 +64,7 @@ const CreateAccount = () => {
           width: "30%",
           border: "1px solid black",
           borderRadius: "50px",
-          padding: "30px",
+          padding: "clamp(2px, 5vh, 30px)",
           bgcolor: "#D7CEC7",
           boxShadow: "2px 2px 10px #565656",
         }}
@@ -81,7 +82,8 @@ const CreateAccount = () => {
           required
           label="Email"
           variant="standard"
-          sx={{ m: 2, gridArea: "email" }}
+          sx={{ m: "1vh", gridArea: "email" }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           onChange={(e) => {
             setAccountDetails({ ...accountDetails, email: e.target.value });
           }}
@@ -91,7 +93,8 @@ const CreateAccount = () => {
           label="Password"
           variant="standard"
           type="password"
-          sx={{ m: 2, gridArea: "password" }}
+          sx={{ m: "1vh", gridArea: "password" }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           onChange={(e) => {
             setAccountDetails({ ...accountDetails, password: e.target.value });
           }}
@@ -100,7 +103,8 @@ const CreateAccount = () => {
           required
           label="First Name"
           variant="standard"
-          sx={{ m: 2, gridArea: "fn" }}
+          sx={{ m: "1vh", gridArea: "fn" }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           onChange={(e) => {
             setAccountDetails({
               ...accountDetails,
@@ -112,7 +116,8 @@ const CreateAccount = () => {
           required
           label="Last Name"
           variant="standard"
-          sx={{ m: 2, gridArea: "ln" }}
+          sx={{ m: "1vh", gridArea: "ln" }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           onChange={(e) => {
             setAccountDetails({ ...accountDetails, last_name: e.target.value });
           }}
@@ -121,7 +126,8 @@ const CreateAccount = () => {
           required
           label="Address"
           variant="standard"
-          sx={{ m: 2, gridArea: "address" }}
+          sx={{ m: "1vh", gridArea: "address" }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           onChange={(e) => {
             setAccountDetails({ ...accountDetails, address: e.target.value });
           }}
@@ -130,7 +136,8 @@ const CreateAccount = () => {
           required
           label="Postal Code"
           variant="standard"
-          sx={{ m: 2, gridArea: "postal" }}
+          sx={{ m: "1vh", gridArea: "postal" }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           onChange={(e) => {
             setAccountDetails({
               ...accountDetails,

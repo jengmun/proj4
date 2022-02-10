@@ -55,12 +55,13 @@ const ProductDetails = () => {
   };
 
   return (
-    <Box sx={{ mt: "150px", display: "flex", justifyContent: "center" }}>
+    <Box sx={{ mt: "15vh", display: "flex", justifyContent: "center" }}>
       <Card
         sx={{
           display: "flex",
           justifyContent: "space-between",
           width: "60vw",
+          bgcolor: "#ede0d4",
           mb: 2,
           transition: "transform 0.5s",
           ":hover": {
@@ -91,7 +92,7 @@ const ProductDetails = () => {
           <Typography sx={{ mt: 2, mb: 2 }}>
             By {productDetails?.author}
           </Typography>
-          <Typography variant="h6" sx={{ mb: 2 }}>
+          <Typography variant="h5" sx={{ mb: 2 }}>
             ${productDetails?.price}
           </Typography>
           <Typography sx={{ mb: 2 }}>{productDetails?.description}</Typography>

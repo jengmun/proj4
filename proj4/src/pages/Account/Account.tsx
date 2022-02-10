@@ -3,9 +3,6 @@ import { useAppSelector } from "../../store/hooks";
 import axios from "axios";
 import {
   Box,
-  Card,
-  CardContent,
-  CardMedia,
   Typography,
   Accordion,
   AccordionSummary,
@@ -71,7 +68,7 @@ const Account = () => {
   return (
     <Box
       sx={{
-        mt: "10rem",
+        mt: "20vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -95,16 +92,19 @@ const Account = () => {
             <AccordionSummary
               sx={{ background: "linear-gradient(135deg, #D7CEC7, #C09F80)" }}
             >
-              <Typography sx={{ width: "70%" }}>
+              <Typography
+                variant="h4"
+                sx={{ width: "70%", letterSpacing: "1px" }}
+              >
                 Order No: {order.order_no}
               </Typography>
               <Box sx={{ width: "30%", textAlign: "right" }}>
-                <Typography>
+                <Typography variant="h5">
                   {`${order.date.slice(8, 10)} ${monthFormatting(
                     order.date.slice(5, 7)
                   )} ${order.date.slice(0, 4)}`}
                 </Typography>
-                <Typography variant="h6">${order.total}</Typography>
+                <Typography variant="h5">${order.total}</Typography>
               </Box>
             </AccordionSummary>
             {order.details.map((item) => {
@@ -114,7 +114,7 @@ const Account = () => {
                 >
                   <Box sx={{ width: "70%", display: "flex" }}>
                     <img src={item["item__image"]} style={{ width: "40%" }} />
-                    <Typography variant="h5" sx={{ p: 2 }}>
+                    <Typography variant="h4" sx={{ p: 2 }}>
                       {item["item__name"]}
                     </Typography>
                   </Box>
@@ -127,8 +127,12 @@ const Account = () => {
                       alignItems: "flex-end",
                     }}
                   >
-                    <Typography>Quantity: {item["quantity"]}</Typography>
-                    <Typography>${item["price"] * item["quantity"]}</Typography>
+                    <Typography variant="h5">
+                      Quantity: {item["quantity"]}
+                    </Typography>
+                    <Typography variant="h5">
+                      ${item["price"] * item["quantity"]}
+                    </Typography>
                   </Box>
                 </AccordionDetails>
               );

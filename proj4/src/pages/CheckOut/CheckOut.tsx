@@ -2,7 +2,6 @@ import { useAppSelector } from "../../store/hooks";
 import axios from "axios";
 import CartItem from "../Cart/CartItem";
 import {
-  Box,
   Button,
   Typography,
   TableContainer,
@@ -40,34 +39,61 @@ const CheckOut = () => {
   };
 
   return (
-    <TableContainer sx={{ mt: "150px", boxSizing: "border-box", p: 2 }}>
-      <Typography sx={{ textAlign: "center" }} variant="h5">
+    <TableContainer
+      sx={{
+        mt: "150px",
+        boxSizing: "border-box",
+        p: 2,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Typography sx={{ textAlign: "center", mb: 3 }} variant="h5">
         Please verify your order details.
       </Typography>
-      <Table>
+      <Table sx={{ maxWidth: "1000px" }}>
         <TableHead>
           <TableRow>
             <TableCell>Product</TableCell>
             <TableCell align="left">Quantity</TableCell>
-            <TableCell align="center">Total</TableCell>
+            <TableCell align="center">Unit Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {cart?.map((item) => {
             return <CartItem item={item}></CartItem>;
           })}
+
+          <TableRow>
+            <TableCell sx={{ border: "none" }} />
+            <TableCell align="right" sx={{ border: "none" }}>
+              <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                Total:
+              </Typography>
+            </TableCell>
+            <TableCell align="center" sx={{ border: "none" }}>
+              <Typography>${totalPrice}</Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{ border: "none" }} />
+            <TableCell sx={{ border: "none" }} />
+            <TableCell sx={{ border: "none" }}>
+              <Button
+                variant="contained"
+                color="warning"
+                sx={{ width: "80%" }}
+                onClick={() => {
+                  confirmOrder();
+                }}
+              >
+                Pay
+              </Button>
+            </TableCell>
+          </TableRow>
         </TableBody>
-      </Table>{" "}
-      <Box sx={{ float: "right", p: 5 }}>
-        <Typography sx={{ pb: 3 }}>Total: ${totalPrice}</Typography>
-        <Button
-          onClick={() => {
-            confirmOrder();
-          }}
-        >
-          Pay
-        </Button>
-      </Box>
+      </Table>
     </TableContainer>
   );
 };

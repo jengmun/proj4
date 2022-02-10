@@ -64,7 +64,7 @@ const AdminLogin = () => {
       }}
     >
       <Button
-        sx={{ position: "absolute", top: 5, left: "210px" }}
+        sx={{ position: "absolute", top: 5, left: "10%" }}
         onClick={() => {
           history.push("/");
         }}

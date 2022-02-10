@@ -60,19 +60,19 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          backgroundColor: "#e1c0c0",
+          backgroundColor: "#ede0d4",
           height: "60%",
           width: "25%",
           boxShadow: "2px 2px 10px grey",
         }}
       >
-        <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
+        <Typography variant="h4" sx={{ textAlign: "center", mb: "3vh" }}>
           WELCOME BACK!
         </Typography>
         <TextField
           required
-          sx={{ m: "1rem", ml: 5, mr: 5 }}
-          size="medium"
+          sx={{ margin: "clamp(2px, 2vh, 10px)", ml: 5, mr: 5 }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           label="Email"
           InputProps={{
             startAdornment: (
@@ -87,8 +87,8 @@ const Login = () => {
         />
         <TextField
           required
-          sx={{ margin: "1rem", ml: 5, mr: 5 }}
-          size="medium"
+          sx={{ margin: "clamp(2px, 2vh, 10px)", ml: 5, mr: 5 }}
+          inputProps={{ style: { padding: "clamp(2px, 1.5vh, 20px)" } }}
           label="Password"
           type="password"
           InputProps={{
@@ -104,7 +104,7 @@ const Login = () => {
         />
 
         <Button
-          sx={{ margin: "1rem", ml: 5, mr: 5 }}
+          sx={{ margin: "1vh", ml: 5, mr: 5, p: "1vh" }}
           variant="contained"
           color="primary"
           onClick={() => {
@@ -116,7 +116,7 @@ const Login = () => {
         <Typography sx={{ textAlign: "center" }}>OR</Typography>
 
         <Button
-          sx={{ mt: "1rem", ml: 5, mr: 5 }}
+          sx={{ mt: "1vh", ml: 5, mr: 5, p: "1vh" }}
           onClick={() => {
             history.push("/admin");
           }}
@@ -158,7 +158,9 @@ const Login = () => {
             variant="contained"
             onClick={() => history.push("/createaccount")}
           >
-            <Typography variant="h4">Create Account</Typography>
+            <Typography variant="h4" sx={{ color: "white" }}>
+              Create Account
+            </Typography>
           </Button>
         </Box>
       </Box>

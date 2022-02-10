@@ -1,4 +1,4 @@
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../store/hooks";
 import { logout } from "../store/user";
@@ -33,7 +33,7 @@ const ShopNav = () => {
               history.push("/");
             }}
           >
-            <Typography variant="h6">HOME</Typography>
+            <Typography variant="h5">HOME</Typography>
           </ListItem>
 
           <ListItem
@@ -42,7 +42,7 @@ const ShopNav = () => {
               history.push("/shop");
             }}
           >
-            <Typography variant="h6">SHOP</Typography>
+            <Typography variant="h5">SHOP</Typography>
           </ListItem>
         </List>
       </Grid>
@@ -71,7 +71,7 @@ const ShopNav = () => {
               sx={{ flex: 0, cursor: "pointer" }}
               onClick={() => history.push("/cart")}
             >
-              <Typography variant="h6">CART</Typography>
+              <Typography variant="h5">CART</Typography>
             </ListItem>
           )}
           {email && (
@@ -79,7 +79,7 @@ const ShopNav = () => {
               sx={{ flex: 0, cursor: "pointer" }}
               onClick={() => history.push("/account")}
             >
-              <Typography variant="h6">ACCOUNT</Typography>
+              <Typography variant="h5">ACCOUNT</Typography>
             </ListItem>
           )}
           {email ? (
@@ -90,14 +90,14 @@ const ShopNav = () => {
                 history.push("/");
               }}
             >
-              <Typography variant="h6">LOG OUT</Typography>
+              <Typography variant="h5">LOG OUT</Typography>
             </ListItem>
           ) : (
             <ListItem
               sx={{ cursor: "pointer" }}
               onClick={() => history.push("/login")}
             >
-              <Typography variant="h6">LOGIN</Typography>
+              <Typography variant="h5">LOGIN</Typography>
             </ListItem>
           )}
         </List>
