@@ -19,12 +19,11 @@ import {
   Area,
   ResponsiveContainer,
 } from "recharts";
-import { CardContent, Card, CardMedia, Typography } from "@mui/material";
+import { Box, CardContent, Card, CardMedia, Typography } from "@mui/material";
 import {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { Box } from "@mui/system";
 
 const Admin = () => {
   const token = useAppSelector((state) => state.admin.token.access);
@@ -380,17 +379,24 @@ const Admin = () => {
             {data.sorted_quantity[0]?.name}
           </Typography>
         </Typography>
-        <CardMedia
+        <CardContent
           sx={{
-            width: "auto",
-            maxWidth: "90%",
-            maxHeight: "210px",
-            float: "right",
+            height: "80%",
+            display: "flex",
+            justifyContent: "center",
             mt: 2,
           }}
-          component="img"
-          image={data.sorted_quantity[0]?.image}
-        />
+        >
+          <CardMedia
+            sx={{
+              width: "90%",
+              height: "80%",
+              objectFit: "contain",
+            }}
+            component="img"
+            image={data.sorted_quantity[0]?.image}
+          />
+        </CardContent>
       </Card>
       {/* 5. Daily Sales */}
       <Card
