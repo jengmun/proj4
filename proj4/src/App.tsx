@@ -11,7 +11,6 @@ import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import Login from "./pages/Login/Login";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import Admin from "./pages/Admin/Admin";
-import Payment from "./pages/CheckOut/Payment";
 import Inventory from "./pages/Admin/Inventory";
 import { useAppSelector } from "./store/hooks";
 
@@ -28,7 +27,6 @@ function App() {
         <Route path="/shop/:id" component={ProductDetails} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckOut} />
-        <Route path="/payment" component={Payment} />
         <Route path="/account" component={Orders} />
         <Route path="/createaccount" component={CreateAccount} />
         <Route path="/login">
