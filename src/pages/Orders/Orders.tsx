@@ -28,7 +28,7 @@ const Orders = () => {
 
   const orderList = () => {
     axios
-      .get(`http://localhost:8000/order/`, {
+      .get(`https://morning-reaches-28938.herokuapp.com/order/`, {
         params: {
           cart_owner: userID,
         },

@@ -18,7 +18,7 @@ const ProductCard = (props: { item: productType }) => {
   const addToCart = () => {
     axios
       .post(
-        `http://localhost:8000/cart/update-cart/${props.item.product_id}/`,
+        `https://morning-reaches-28938.herokuapp.com/cart/update-cart/${props.item.product_id}/`,
         {
           cart_item: props.item.product_id,
           cart_owner: userID,

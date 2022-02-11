@@ -23,7 +23,7 @@ const ProductDetails = () => {
 
   const getProductDetails = () => {
     axios
-      .get(`http://localhost:8000/inventory/${params.id}`)
+      .get(`https://morning-reaches-28938.herokuapp.com/inventory/${params.id}`)
       .then((response) => {
         setProductDetails(response.data);
       })
@@ -39,7 +39,7 @@ const ProductDetails = () => {
   const addToCart = () => {
     axios
       .post(
-        `http://localhost:8000/cart/update-cart/${params.id}/`,
+        `https://morning-reaches-28938.herokuapp.com/cart/update-cart/${params.id}/`,
         {
           cart_item: params.id,
           cart_owner: userID,

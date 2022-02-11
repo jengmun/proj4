@@ -23,7 +23,7 @@ const CheckOut = () => {
   const confirmOrder = () => {
     axios
       .post(
-        `http://localhost:8000/order/create/`,
+        `https://morning-reaches-28938.herokuapp.com/order/create/`,
         {
           cart_owner: userID,
           total: totalPrice,

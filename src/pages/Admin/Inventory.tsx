@@ -20,24 +20,26 @@ const Inventory = () => {
   >([]);
 
   const fetchData = () => {
-    axios.get("http://localhost:8000/inventory/").then((response) => {
-      const sortedData = response.data.sort(
-        (a: { name: string }, b: { name: string }) => {
-          const A = a.name.toUpperCase();
-          const B = b.name.toUpperCase();
-          if (A < B) {
-            return -1;
-          }
-          if (A > B) {
-            return 1;
-          }
+    axios
+      .get("https://morning-reaches-28938.herokuapp.com/inventory/")
+      .then((response) => {
+        const sortedData = response.data.sort(
+          (a: { name: string }, b: { name: string }) => {
+            const A = a.name.toUpperCase();
+            const B = b.name.toUpperCase();
+            if (A < B) {
+              return -1;
+            }
+            if (A > B) {
+              return 1;
+            }
 
-          return 0;
-        }
-      );
+            return 0;
+          }
+        );
 
-      setInventory(sortedData);
-    });
+        setInventory(sortedData);
+      });
   };
 
   useEffect(() => {
@@ -50,7 +52,7 @@ const Inventory = () => {
     }
     axios
       .post(
-        `http://localhost:8000/inventory/update-inventory/${product}/`,
+        `https://morning-reaches-28938.herokuapp.com/inventory/update-inventory/${product}/`,
         {
           quantity: currentQty + qty,
         },

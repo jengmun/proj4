@@ -23,14 +23,14 @@ const Login = () => {
 
   const handleLogin = (loginDetails: loginType) => {
     axios
-      .post("http://localhost:8000/user/login/", {
+      .post("https://morning-reaches-28938.herokuapp.com/user/login/", {
         email: loginDetails.email,
         password: loginDetails.password,
       })
       .then((token) => {
         axios
           .get(
-            `http://localhost:8000/user/get-account-details/${loginDetails.email}/`,
+            `https://morning-reaches-28938.herokuapp.com/user/get-account-details/${loginDetails.email}/`,
             { headers: { Authorization: `Bearer ${token.data.access}` } }
           )
           .then((details) => {

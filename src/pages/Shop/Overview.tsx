@@ -9,7 +9,7 @@ const Overview = () => {
 
   const getAllItems = () => {
     axios
-      .get("http://localhost:8000/inventory/")
+      .get("https://morning-reaches-28938.herokuapp.com/inventory/")
       .then((response) => {
         setAllItems(response.data);
       })

@@ -26,7 +26,7 @@ const AdminLogin = () => {
   const handleLogin = (loginDetails: loginType) => {
     setError("");
     axios
-      .post("http://localhost:8000/user/admin-login/", {
+      .post("https://morning-reaches-28938.herokuapp.com/user/admin-login/", {
         email: loginDetails.email,
         password: loginDetails.password,
       })
@@ -34,7 +34,7 @@ const AdminLogin = () => {
         token.data.access
           ? axios
               .get(
-                `http://localhost:8000/user/get-account-details/${loginDetails.email}/`,
+                `https://morning-reaches-28938.herokuapp.com/user/get-account-details/${loginDetails.email}/`,
                 { headers: { Authorization: `Bearer ${token.data.access}` } }
               )
               .then((details) => {

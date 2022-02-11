@@ -46,7 +46,7 @@ const Admin = () => {
 
   const fetchData = () => {
     axios
-      .get(`http://localhost:8000/order/analytics/`, {
+      .get(`https://morning-reaches-28938.herokuapp.com/order/analytics/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

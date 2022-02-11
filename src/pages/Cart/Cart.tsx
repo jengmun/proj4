@@ -27,7 +27,7 @@ const Cart = () => {
 
   const fetchCart = () => {
     axios
-      .get(`http://localhost:8000/cart/`, {
+      .get(`https://morning-reaches-28938.herokuapp.com/cart/`, {
         params: { cart_owner: userID },
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -68,7 +68,7 @@ const Cart = () => {
   const addToCart = (item: string) => {
     axios
       .post(
-        `http://localhost:8000/cart/update-cart/${item}/`,
+        `https://morning-reaches-28938.herokuapp.com/cart/update-cart/${item}/`,
         {
           cart_item: item,
           cart_owner: userID,
@@ -86,10 +86,13 @@ const Cart = () => {
   // reduce quantity of item
   const decreaseCartQuantity = (item: string) => {
     axios
-      .delete(`http://localhost:8000/cart/update-cart/${item}/`, {
-        params: { cart_owner: userID },
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(
+        `https://morning-reaches-28938.herokuapp.com/cart/update-cart/${item}/`,
+        {
+          params: { cart_owner: userID },
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
         fetchCart();
       })
@@ -101,10 +104,13 @@ const Cart = () => {
   // full delete from cart
   const removeItem = (item: string) => {
     axios
-      .delete(`http://localhost:8000/cart/remove-from-cart/${item}/`, {
-        params: { cart_owner: userID },
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(
+        `https://morning-reaches-28938.herokuapp.com/cart/remove-from-cart/${item}/`,
+        {
+          params: { cart_owner: userID },
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
         fetchCart();
       })

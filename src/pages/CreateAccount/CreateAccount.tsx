@@ -23,14 +23,17 @@ const CreateAccount = () => {
 
   const handleCreateAccount = (accountDetails: accountType) => {
     axios
-      .post("http://localhost:8000/user/create-account/", {
-        email: accountDetails.email,
-        first_name: accountDetails.first_name,
-        last_name: accountDetails.last_name,
-        address: accountDetails.address,
-        postal_code: accountDetails.postal_code,
-        password: accountDetails.password,
-      })
+      .post(
+        "https://morning-reaches-28938.herokuapp.com/user/create-account/",
+        {
+          email: accountDetails.email,
+          first_name: accountDetails.first_name,
+          last_name: accountDetails.last_name,
+          address: accountDetails.address,
+          postal_code: accountDetails.postal_code,
+          password: accountDetails.password,
+        }
+      )
       .then((response) => {
         setOpen(true);
       })
