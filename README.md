@@ -27,7 +27,7 @@ An online bookstore!
 - View list of past orders
 
 ## 2. Admin View
-- Login as admin
+- Login as admin (Email: superuser@email.com | Password: superuser)
 - Review stock quantity and replenish if necessary
 - Features an analytics dashboard displaying data such as 
     - Breakdown of revenue and cost by product
