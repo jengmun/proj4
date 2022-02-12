@@ -42,6 +42,7 @@ const AdminNav = () => {
                 background: "linear-gradient(135deg, #db4ee3, #3022ae)",
                 backgroundClip: "text",
                 color: "transparent",
+                textAlign: "center",
               }}
             >
               {firstName}
